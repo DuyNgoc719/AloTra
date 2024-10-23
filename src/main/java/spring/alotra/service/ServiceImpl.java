@@ -5,12 +5,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
-import spring.alotra.entity.UserEntity;
+import spring.alotra.entity.Role;
+import spring.alotra.entity.UsersEntity;
 import spring.alotra.repository.UserRepository;
 
 import java.time.Instant;
@@ -32,20 +32,20 @@ public class ServiceImpl {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public String registerUser(UserEntity user) {
-        Optional<UserEntity> userEntity = userRepository.findByUsername(user.getUsername());
+    public String registerUser(UsersEntity user) {
+        Optional<UsersEntity> userEntity = userRepository.findByUsername(user.getUsername());
         if (userEntity.isPresent()) {
             return "Username is already in use";
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("ROLE_USER");
+        user.setRole(Role.USER);
         userRepository.save(user);
         return "User registered successfully";
     }
 
     public Map<String,Object> login(String username, String password) {
 
-        Optional<UserEntity> userEntity = userRepository.findByUsername(username);
+        Optional<UsersEntity> userEntity = userRepository.findByUsername(username);
         Map<String,Object> respone = new HashMap<>();
         Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
@@ -59,7 +59,7 @@ public class ServiceImpl {
         return respone;
     }
 
-    private String generateToken(UserEntity userEntity, Authentication authentication,long expiryDuration){
+    private String generateToken(UsersEntity usersEntity, Authentication authentication, long expiryDuration){
         Instant now =  Instant.now();
         JwtClaimsSet claimsSet = JwtClaimsSet.builder()
                 .issuer("Ornate")
@@ -67,7 +67,6 @@ public class ServiceImpl {
                 .expiresAt(now.plusSeconds(expiryDuration))
                 .subject(authentication.getName())
                 .claim("role",authentication.getAuthorities().toString())
-                .claim("firstName",userEntity.getFirstName())
                 .build();
         return jwtEncoder.encode(JwtEncoderParameters.from(claimsSet)).getTokenValue();
     }

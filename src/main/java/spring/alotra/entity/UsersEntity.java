@@ -14,23 +14,24 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="User")
 @Data
-public class UserEntity {
+public class UsersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable=false)
+    @Column(nullable=false,unique = true)
     private String username;
 
     @Column(nullable=false)
     private String password;
 
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    @Column(nullable=false)
+    @Column(nullable=false,unique=true)
     private String email;
 
-    @Column(nullable=false)
+    @Column(nullable=false,unique=true)
     private String phone;
 
     @Column(nullable=false)

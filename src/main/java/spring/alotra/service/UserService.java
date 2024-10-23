@@ -7,10 +7,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import spring.alotra.entity.UserEntity;
+import spring.alotra.entity.UsersEntity;
 import spring.alotra.repository.UserRepository;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,11 +22,13 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity userEntity = userRepository.findByUsername(username).orElseThrow(()->
+        UsersEntity usersEntity = userRepository.findByUsername(username).orElseThrow(()->
                 new UsernameNotFoundException("not fond username"));
-        return new User(userEntity.getUsername(),userEntity.getPassword(),
-                Arrays.stream(userEntity.getRole().split("\\|"))
-                        .map(SimpleGrantedAuthority::new).collect(Collectors.toList())
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(usersEntity.getRole().name());
+        return new User(
+                usersEntity.getUsername(),
+                usersEntity.getPassword(),
+                Collections.singleton(authority)
         );
     }
 }
