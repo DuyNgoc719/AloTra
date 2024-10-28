@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.navbar {
+    background-color: #a00000;padding: 0;display: flex;align-items: flex-end;
+}
+.navbar-nav .nav-link {
+    color: white !important; font-weight: bold;padding: 10px 5px;display: flex;align-items: center;
+}
+.collapse.navbar-collapse {
+    margin-top: auto;
+}
+.navbar-nav {
+    justify-content: space-around; width: 85%;align-items: flex-end;padding: 0;
+}
+.navbar-nav .nav-link:hover,
+.nav-item:hover > .nav-link {
+    color: #ffcc00 !important;
+    background-color:#4b2e2a  !important;
+}
+
+.search-bar {
+    width: 250px;
+}
+.search-bar input, .search-bar button {
+    border: 1px solid #ccc;
+}
+.promo {
+    background-color: #f9f9f9; text-align: center; padding: 50px 0;
+}
+.promo h1 {
+    color: #a00000; font-size: 50px; font-weight: bold;
+}
+.promo p {
+    color: #a00000; font-size: 24px;
+}
+.new-store {
+    position: relative; text-align: center; color: white;
+}
+.new-store .store-info {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+}
+.latest-news {
+    background-color: #f9e4b7; padding: 20px;
+}
+.news-item {
+    display: flex; margin-bottom: 10px;
+}
+.news-item img {
+    width: 80px; height: 80px; margin-right: 10px;
+}
+.footer {
+    background-color: #3a3a3a; color: white; padding: 10px 0; text-align: center;
+}
+.footer a {
+    color: white; margin: 0 10px;
+}
+.menu-section {
+    display: none;
+    color: #f4a460;
+    font-family: Arial, sans-serif;
+    background-color: #4b2e2a;
+    padding: 20px 20px 20px 200px;
+    overflow-y: auto;
+}
+.menu-section h5 {
+    width: 100%;
+    padding: 10px;
+    color: #f4a460;
+    font-weight: bold;
+}
+.menu-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+.menu-section ul li {
+    background-color: #4b2e2a;
+    margin-bottom: 10px;
+}
+.menu-section ul li a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+.menu-section ul li a:hover {
+    color: #ffc107;
+}
+.menu-open {
+    color: #ffcc00 !important;
+    background-color: #4b2e2a !important;
+}
+.nav-item:hover .menu-section {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.search-icon {
+    float: right;
+    margin-left: 10px;
+}
