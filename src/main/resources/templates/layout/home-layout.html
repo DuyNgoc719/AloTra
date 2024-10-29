@@ -1,0 +1,94 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Trang Chủ</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/navbar.css}">
+</head>
+<body>
+<div th:fragment="nar-bar">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{home}">
+                <img th:src="@{/image/Logo.png}" width="140" height="95" alt="Logo">
+            </a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mt-5">
+                    <li class="nav-item"><a class="nav-link" href="#">VỀ CHÚNG TÔI</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">TIN TỨC</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">MUA NGAY</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{menu}">THỰC ĐƠN</a>
+                        <div class="menu-section">
+                        <div class="row d-flex">
+                            <div class="col">
+                                <ul>
+                                    <li><a href="#"><h5>CÀ PHÊ</h5></a></li>
+                                    <li><a href="#">Cà Phê Phin</a></li>
+                                    <li><a href="#">PhinDi</a></li>
+                                    <li><a href="#">Cà Phê Espresso</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul>
+                                    <li><a href="#"><h5>FREEZE</h5></a></li>
+                                    <li><a href="#">Freeze Cà Phê Phin</a></li>
+                                    <li><a href="#">Freeze Không Cà Phê</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul>
+                                    <li><a href="#"><h5>TRÀ</h5></a></li>
+                                    <li><a href="#">Trà Sen Vàng Mới</a></li>
+                                    <li><a href="#">Trà Thạch Đào</a></li>
+                                    <li><a href="#">Trà Thanh Đào</a></li>
+                                    <li><a href="#">Trà Thạch Vải</a></li>
+                                    <li><a href="#">TRÀ NHIỆT ĐỚI (MỚI!)</a></li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul>
+                                    <li><a href="#"><h5>KHÁC</h5></a></li>
+                                    <li><a href="#">Bánh Trung Thu</a></li>
+                                    <li><a href="#">Bánh Ngọt</a></li>
+                                    <li><a href="#">Merchandise</a></li>
+                                    <li><a href="#">Cà Phê Đóng Gói</a></li>
+                                    <li><a href="#">Thực Đơn Giao Hàng</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">TUYỂN DỤNG</a></li>
+                </ul>
+                <span class="search-container">
+                    <img th:src="@{/image/covietnam.png}" height="40px" width="40px" class="search-icon">
+                    <div class="search-bar input-group">
+                        <input type="text" class="form-control" placeholder="Từ khóa">
+                        <button class="btn btn-light" type="button"><i class="fas fa-search"></i></button>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </nav>
+    </div>
+<div th:fragment="footer">
+<footer class="footer mt-4">
+    <div class="container">
+        <p>© 2018 Highlands Coffee. All rights reserved</p>
+        <div>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>Đăng ký để nhận bản tin</p>
+        <p>customerservice@highlandscoffee.com.vn</p>
+    </div>
+</footer>
+</div>
+<script th:src="@{/js/home.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

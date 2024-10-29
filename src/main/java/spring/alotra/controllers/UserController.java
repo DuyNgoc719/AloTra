@@ -47,8 +47,12 @@ public class UserController {
         return mav;
     }
     @GetMapping("home")
-    public String showHomePage(){
-        return "home-page";
+    public String showHomePage(Model model){
+        return "home";
+    }
+    @GetMapping("menu")
+    public String showMenuPage(Model model){
+        return "menu";
     }
 
 

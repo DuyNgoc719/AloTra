@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+.section {
+
+    text-align: center;
+
+    overflow: visible;
+}
+.section h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+.section p {
+    font-size: 1.2rem;
+;
+}
+.section .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: 2px solid;
+    border-radius: 0;
+}
+.section-coffee {
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 36%, rgba(88,35,0,1) 61%, rgba(145,90,32,1) 71%, rgba(152,79,0,1) 90%, rgba(48,0,25,1) 100%);
+    color: white;
+}
+.section-freeze {
+    background: rgb(165,245,244);
+    background: linear-gradient(90deg, rgba(165,245,244,1) 0%, rgba(238,238,238,1) 70%, rgba(163,237,230,1) 87%);
+    color: #02682C;
+}
+.section-tea {
+    background: rgb(110,158,145);
+    background: linear-gradient(90deg, rgba(110,158,145,1) 0%, rgba(127,167,156,1) 63%);
+    color: white;
+}
+.section img {
+    max-width: 100%;
+    max-height: 600px;
+    object-fit: cover;
+    z-index: 1;
+    position: static;
+}

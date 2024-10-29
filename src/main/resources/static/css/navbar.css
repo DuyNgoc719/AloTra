@@ -25,36 +25,7 @@ body {
 .search-bar input, .search-bar button {
     border: 1px solid #ccc;
 }
-.promo {
-    background-color: #f9f9f9; text-align: center; padding: 50px 0;
-}
-.promo h1 {
-    color: #a00000; font-size: 50px; font-weight: bold;
-}
-.promo p {
-    color: #a00000; font-size: 24px;
-}
-.new-store {
-    position: relative; text-align: center; color: white;
-}
-.new-store .store-info {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-}
-.latest-news {
-    background-color: #f9e4b7; padding: 20px;
-}
-.news-item {
-    display: flex; margin-bottom: 10px;
-}
-.news-item img {
-    width: 80px; height: 80px; margin-right: 10px;
-}
-.footer {
-    background-color: #3a3a3a; color: white; padding: 10px 0; text-align: center;
-}
-.footer a {
-    color: white; margin: 0 10px;
-}
+
 .menu-section {
     display: none;
     color: #f4a460;
@@ -102,4 +73,10 @@ body {
 .search-icon {
     float: right;
     margin-left: 10px;
+}
+.footer {
+    background-color: #3a3a3a; color: white; padding: 10px 0; text-align: center;
+}
+.footer a {
+    color: white; margin: 0 10px;
 }
