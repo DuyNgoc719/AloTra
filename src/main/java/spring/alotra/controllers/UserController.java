@@ -55,5 +55,10 @@ public class UserController {
         return "menu";
     }
 
+    @GetMapping("itemDrink")
+    public String showItemDrinkPage(Model model){
+        return "item-drink";
+    }
+
 
 }

@@ -33,6 +33,11 @@ body {
     background-color: #4b2e2a;
     padding: 20px 20px 20px 200px;
     overflow-y: auto;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 .menu-section h5 {
     width: 100%;
@@ -79,4 +84,7 @@ body {
 }
 .footer a {
     color: white; margin: 0 10px;
+}
+.nav-item.active .menu-section,.nav-link.active .menu-section {
+    display: block;
 }
