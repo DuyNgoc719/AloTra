@@ -5,28 +5,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import spring.alotra.entity.UsersEntity;
-import spring.alotra.service.ServiceImpl;
+import spring.alotra.entity.User;
+import spring.alotra.service.UserServiceImpl;
 
 
 @Controller
-@RequestMapping("/auth")
+@RequestMapping("/")
 public class UserController {
 
     @Autowired
-    private ServiceImpl service;
+    private UserServiceImpl service;
 
     @GetMapping("/register")
     public String showRegisterForm(Model model){
-        model.addAttribute("user", new UsersEntity());
+        model.addAttribute("user", new User());
         return "register";
     }
 
     @PostMapping("/register" )
-    public ModelAndView processRegisterForm(@ModelAttribute("user") UsersEntity user){
+    public ModelAndView processRegisterForm(@ModelAttribute("user") User user){
         ModelAndView mav = new ModelAndView();
-        String response = service.registerUser(user);
-        mav.setViewName("redirect:/auth/login");
+        service.registerUser(user);
+        mav.setViewName("redirect:/login");
         return mav;
     }
 

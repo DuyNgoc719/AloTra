@@ -9,11 +9,20 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../static/css/register.css">
 </head>
+<<<<<<< HEAD
 
 <body>
     <div class="register-container">
         <!-- Left Section: Image -->
         <div class="register-image"><img class="imgregister" src="../static/image/login/traSua.png" alt="hình trà sữa">
+=======
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<div class="bg-white p-10 rounded shadow-md w-full max-w-lg">
+    <h1 class="text-center text-2xl font-light text-gray-700 mb-6">Đăng Ký</h1>
+    <form th:action="@{/register}" th:object="${user}" method="post">
+        <div class="mb-4">
+            <input type="text" th:field="*{username}" class="w-full py-3 px-4 text-gray-700 border rounded" placeholder="Username" required>
+>>>>>>> aa818d45dfdd77e087c2845789b5a995967ed8bd
         </div>
 
         <!-- Right Section: Form -->
