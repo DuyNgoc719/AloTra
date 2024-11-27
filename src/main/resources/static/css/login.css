@@ -1,0 +1,93 @@
+/* Cài đặt lại cho body */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Hiệu ứng overlay cho body */
+body::before {
+    content: '';
+    position: absolute;
+    background-image: url('../image/login/background2.png');
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+/* Container chính */
+.login-container {
+    margin: auto;
+    position: relative;
+    z-index: 1;
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 32rem;
+}
+
+/* Thiết lập cho các input */
+input {
+    border: 1px solid #fa9898;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    padding: 0.75rem 1rem;
+    color: #4a5568;
+    border-radius: 0.25rem;
+    width: 100%;
+}
+
+input:focus {
+    outline: none;
+    border-color: #fcf961;
+    box-shadow: 0 0 3px rgba(225, 250, 137, 0.8);
+}
+
+/* Thiết lập cho nút bấm */
+button {
+    width: 100%;
+    background-color: #b91c1c;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 1.125rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+}
+
+button:hover {
+    background-color: #fa9441;
+    transform: scale(1.02);
+}
+
+/* Định dạng liên kết */
+a {
+    color: #4299e1;
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #f895cf;
+}
+
+/* Footer */
+.footer {
+    background-color: black;
+    color: #fff;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.footer a {
+    margin: 0 0.5rem;
+    color: inherit;
+    text-decoration: none;
+}
