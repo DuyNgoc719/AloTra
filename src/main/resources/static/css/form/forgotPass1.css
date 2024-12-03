@@ -6,7 +6,6 @@
             line-height: inherit;
         }
 
-        /* Overlay để đặt background dưới nội dung */
         body::before {
             content: '';
             position: absolute;
@@ -15,10 +14,8 @@
             right: 0;
             bottom: 0;
             background: rgba(255, 255, 255, 0.8);
-            /* Thêm lớp phủ mờ (nếu cần) */
             z-index: -1;
-            /* Đảm bảo hình nền nằm phía sau form */
-            background-image: url('../image/login/background2.png');
+            background-image: url('../../image/login/background-login.jpg');
             background-repeat: no-repeat;
             background-size: cover;
         }

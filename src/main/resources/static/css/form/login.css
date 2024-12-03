@@ -1,4 +1,3 @@
-/* Cài đặt lại cho body */
 body {
     margin: 0;
     font-family: 'Arial', sans-serif;
@@ -9,11 +8,14 @@ body {
     position: relative;
 }
 
-/* Hiệu ứng overlay cho body */
+
 body::before {
     content: '';
     position: absolute;
-    background-image: url('../image/login/background2.png');
+    background-image: url('../../image/login/background-login.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     top: 0;
     left: 0;
     right: 0;
@@ -21,7 +23,8 @@ body::before {
     z-index: 0;
 }
 
-/* Container chính */
+
+
 .login-container {
     margin: auto;
     position: relative;
@@ -34,7 +37,6 @@ body::before {
     max-width: 32rem;
 }
 
-/* Thiết lập cho các input */
 input {
     border: 1px solid #fa9898;
     transition: border-color 0.3s, box-shadow 0.3s;
@@ -50,7 +52,7 @@ input:focus {
     box-shadow: 0 0 3px rgba(225, 250, 137, 0.8);
 }
 
-/* Thiết lập cho nút bấm */
+
 button {
     width: 100%;
     background-color: #b91c1c;
@@ -67,7 +69,7 @@ button:hover {
     transform: scale(1.02);
 }
 
-/* Định dạng liên kết */
+
 a {
     color: #4299e1;
     transition: color 0.2s ease;
@@ -78,7 +80,7 @@ a:hover {
     color: #f895cf;
 }
 
-/* Footer */
+
 .footer {
     background-color: black;
     color: #fff;

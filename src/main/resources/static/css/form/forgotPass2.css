@@ -18,7 +18,7 @@ body::before {
     /* Thêm lớp phủ mờ (nếu cần) */
     z-index: -1;
     /* Đảm bảo hình nền nằm phía sau form */
-    background-image: url('../image/login/background2.png');
+    background-image: url('../image/login/background-login.png');
     background-repeat: no-repeat;
     background-size: cover;
 }

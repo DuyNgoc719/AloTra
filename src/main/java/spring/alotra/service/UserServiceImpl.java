@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
@@ -55,6 +56,7 @@ public class UserServiceImpl {
         String accessToken =generateToken(userEntity.get(),auth,3600);
         respone.put("access_token", accessToken);
         respone.put("expires_in", 3600);
+        respone.put("role", userEntity.get().getUserRole().toString());
         return respone;
     }
 
@@ -69,4 +71,10 @@ public class UserServiceImpl {
                 .build();
         return jwtEncoder.encode(JwtEncoderParameters.from(claimsSet)).getTokenValue();
     }
+
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+    }
+
 }

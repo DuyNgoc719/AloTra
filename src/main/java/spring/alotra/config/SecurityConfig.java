@@ -1,5 +1,6 @@
 package spring.alotra.config;
 
+import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 
@@ -16,7 +17,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import spring.alotra.service.UserService;
@@ -49,7 +52,6 @@ public class SecurityConfig {
                         .requestMatchers("/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
-
                 .formLogin(AbstractHttpConfigurer::disable);
         return http.build();
     }
@@ -69,6 +71,12 @@ public class SecurityConfig {
         RSAKey rsaKey = loadRSAKey();
         JWKSource<SecurityContext> jwkSource = ((jwkSelector, securityContext) -> jwkSelector.select(new JWKSet(rsaKey)));
         return  new NimbusJwtEncoder(jwkSource);
+    }
+
+    @Bean
+    public JwtDecoder jwtDecoder() throws UnrecoverableKeyException, CertificateException, KeyStoreException, IOException, NoSuchAlgorithmException, JOSEException {
+        RSAKey rsaKey = loadRSAKey();
+        return NimbusJwtDecoder.withPublicKey(rsaKey.toRSAPublicKey()).build();
     }
 
     private RSAKey loadRSAKey() throws KeyStoreException, IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException {

@@ -1,5 +1,6 @@
 package spring.alotra.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,18 +32,25 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String showLoginForm(){
+    public String showLoginForm(Model model){
         return "login";
     }
 
     @PostMapping("/login")
-    public ModelAndView processLoginForm(@RequestParam String username, @RequestParam String password){
+    public ModelAndView processLoginForm(@RequestParam String username, @RequestParam String password, HttpSession session) {
         ModelAndView mav = new ModelAndView();
         var resp = service.login(username, password);
-        if (resp.containsKey("access_token")){
-            mav.setViewName("redirect:/homepage");
+        if (resp.containsKey("access_token")) {
+            String role = (String) resp.get("role");
+            String token = (String) resp.get("access_token");
+            session.setAttribute("access_token", token);
+            if (role.equals("ADMIN")) {
+                mav.setViewName("redirect:/admin/");
+            } else {
+                mav.setViewName("redirect:/home");
+            }
         } else {
-            mav.setViewName("redirect:/login");
+            mav.setViewName("login");
         }
         return mav;
     }
@@ -59,6 +67,5 @@ public class UserController {
     public String showItemDrinkPage(Model model){
         return "item-drink";
     }
-
 
 }
