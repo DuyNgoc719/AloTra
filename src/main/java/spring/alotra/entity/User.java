@@ -22,13 +22,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name ="firstName" , nullable = false)
+    @Column(nullable = false)
     private String firstName;
 
-    @Column(name = "lastName", nullable = false)
+    @Column(nullable = false)
     private String lastName;
 
-    @Column(name = "cardId")
+    @Column()
     private Integer cardId;
 
     @Column(nullable = false, length = 500)
@@ -37,7 +37,7 @@ public class User {
     @Column(nullable = false, length = 10)
     private String phone;
 
-    @Column(name = "isEmailActive")
+    @Column()
     private Boolean isEmailActive;
 
     @Column(nullable = false,unique = true)
@@ -47,29 +47,30 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "userRole", nullable = false, length = 10)
+    @Column(nullable = false, length = 10)
     private UserRole userRole;
 
     @OneToOne
-    @JoinColumn(name = "addressId", referencedColumnName = "id")
+    @JoinColumn(referencedColumnName = "id")
     private UserAddresses address;
 
-    @Column(length = 500)
+    @Lob
+    @Column(columnDefinition = "LONGTEXT")
     private String avatar;
 
     @Column(length = 255)
     private String cover;
 
-    @Column(name = "userPoint")
+    @Column()
     private Integer userPoint;
 
-    @Column(name = "eWallet", precision = 10, scale = 2)
+    @Column( precision = 10, scale = 2)
     private BigDecimal eWallet;
 
-    @Column(name = "createdAt", nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "updatedAt", nullable = false)
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
 
     @PrePersist

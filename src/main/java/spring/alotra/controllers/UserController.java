@@ -44,6 +44,7 @@ public class UserController {
             String role = (String) resp.get("role");
             String token = (String) resp.get("access_token");
             session.setAttribute("access_token", token);
+            System.out.println(role);
             if (role.equals("ADMIN")) {
                 mav.setViewName("redirect:/admin/");
             } else {

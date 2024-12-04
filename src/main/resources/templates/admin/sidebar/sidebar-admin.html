@@ -1,45 +1,69 @@
-
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Quản lý trà sữa</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/admin/dashboard.css}" />
+</head>
+<body>
 <div th:fragment="sidebar">
-    <nav class="col-md-2 d-none d-md-block bg-dark sidebar">
-      <div class="sidebar-sticky">
-        <h4 class="text-white text-center py-3">Admin Dashboard</h4>
-        <ul class="nav flex-column">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Admin Dashboard</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link text-white" href="/admin/dashboard">
+            <a class="nav-link"  href="/admin/">
               <i class="bi bi-house-door"></i> Trang chủ
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="/admin/information">
-              <i class="bi bi-cup-hot"></i> Quản lý tài khoản
+            <a class="nav-link" href="/admin/information">
+              <i class="bi bi-cup-hot"></i>Tài Khoản
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="productDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-cup-hot"></i>Sản Phẩm
+            </a>
+            <ul class="dropdown-menu bg-dark" aria-labelledby="productDropdown" >
+              <li><a class="dropdown-item" href="/admin/category">Danh mục sản phẩm</a></li>
+              <li><a class="dropdown-item" href="/admin/product">Sản phẩm</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="bi bi-people"></i>Nhân Viên
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">
-              <i class="bi bi-cup-hot"></i> Quản lý Sản phẩm
+            <a class="nav-link" href="#">
+              <i class="bi bi-cart"></i>Đơn Hàng
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">
-              <i class="bi bi-people"></i> Quản lý Nhân viên
+            <a class="nav-link" href="#">
+              <i class="bi bi-bar-chart"></i>Doanh Thu
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">
-              <i class="bi bi-cart"></i> Quản lý Đơn hàng
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#">
-              <i class="bi bi-bar-chart"></i> Báo cáo doanh thu
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#">
-              <i class="bi bi-cup-hot"></i> Quản lý khách hàng
+            <a class="nav-link" href="#">
+              <i class="bi bi-cup-hot"></i> Khách Hàng
             </a>
           </li>
         </ul>
       </div>
-    </nav>
+      <div class="d-flex align-items-center">
+        <a href="/admin/logout" class="btn btn-outline-light btn-sm ms-2">
+          <i class="bi bi-door-open"></i> Logout
+        </a>
+      </div>
+    </div>
+  </nav>
 </div>
+</body>
+</html>
