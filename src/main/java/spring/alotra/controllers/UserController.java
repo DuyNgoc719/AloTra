@@ -67,5 +67,9 @@ public class UserController {
     public String showItemDrinkPage(Model model){
         return "item-drink";
     }
+    @GetMapping("asd")
+    public String showAsdPage(Model model){
+        return "asd";
+    }
 
 }

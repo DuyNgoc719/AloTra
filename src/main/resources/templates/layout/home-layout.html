@@ -63,19 +63,24 @@
                     <li class="nav-item"><a class="nav-link" href="#">TUYỂN DỤNG</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">TUYỂN DỤNG</a></li>
                     <!-- Thêm giỏ hàng -->
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{cart}">
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
-                    </li>
                 </ul>
-                <span class="search-container">
-                    <img th:src="@{/image/home/covietnam.png}" height="40px" width="40px" class="search-icon">
-                    <div class="search-bar input-group">
-                        <input type="text" class="form-control" placeholder="Từ khóa">
-                        <button class="btn btn-light" type="button"><i class="fas fa-search"></i></button>
+                <div class="d-flex align-items-center">
+                    <!-- Search Box -->
+                    <div class="search-container mt-5">
+                        <div class="search-bar input-group">
+                            <input type="text" class="form-control" placeholder="Từ khóa">
+                            <button class="btn btn-light" type="button"><i class="fas fa-search"></i></button>
+                        </div>
                     </div>
-                </span>
+                    <!-- Icon Giỏ Hàng -->
+                    <a class="nav-link mt-5" th:href="@{cart}" style="color: white; font-size: 24px;padding-left: 30px">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    <!-- Icon User -->
+                    <a class="nav-link mt-5" th:href="@{account}" style="color: white; font-size: 24px;padding-left: 30px">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
