@@ -4,12 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import spring.alotra.entity.Category;
 import spring.alotra.entity.Product;
 import spring.alotra.repository.CategoryRepository;
 import spring.alotra.service.CategoryService;
 import spring.alotra.service.ProductService;
+import spring.alotra.service.UserService;
+import spring.alotra.service.UserServiceImpl;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +28,8 @@ public class ProductController {
     private CategoryService categoryService;
     @Autowired
     private CategoryRepository categoryRepository;
+    @Autowired
+    private UserServiceImpl userService;
 
 
     @GetMapping("/product")
@@ -58,7 +64,6 @@ public class ProductController {
                                 @RequestParam String description,
                                 @RequestParam Double prices,
                                 @RequestParam Double discountPercentages,
-                                @RequestParam String images,
                                 @RequestParam Category category,
                                 Model model) {
         Optional<Product> productOpt = productService.findById(id);
@@ -68,7 +73,6 @@ public class ProductController {
             product.setDescription(description);
             product.setPrices(prices);
             product.setDiscountPercentages(discountPercentages);
-            product.setImages(images);
             product.setCategory(category);
 
             productService.saveProduct(product);
@@ -82,4 +86,41 @@ public class ProductController {
         productService.deleteProduct(id);
         return "redirect:/admin/product";
     }
+
+    @GetMapping("information/{id}")
+    public String showInformationProductForm(Model model,@PathVariable Long id) {
+        Optional<Product> productOpt = productService.findById(id);
+        List<Category> categories = categoryService.getCategory();
+        if (productOpt.isPresent()) {
+            Product product = productOpt.get();
+            model.addAttribute("product", product);
+            model.addAttribute("categories", categories);
+        }
+        return "admin/infor-product";
+    }
+
+    @PostMapping("updateInforProduct")
+    public String updateInformationProduct(@ModelAttribute Product product, @RequestParam("productPicture") MultipartFile file,
+                                            @RequestParam Category category) {
+        if (!file.isEmpty()) {
+            try {
+                String encodedImage = userService.encodeImage(file);
+                product.setImages(encodedImage);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (product.getImages() == null) {
+            Optional<Product> productOpt = productService.findById(product.getId());
+            if (productOpt.isPresent()) {
+                product = productOpt.get();
+                product.setImages(product.getImages().toString());
+            }
+        }
+        product.setCategory(category);
+        productService.saveProduct(product);
+        return "redirect:/admin/product";
+    }
+
 }

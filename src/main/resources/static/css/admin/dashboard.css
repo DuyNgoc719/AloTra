@@ -50,3 +50,19 @@ body {
     background-color: #495057;
     color: #f8f9fa;
 }
+.table td, .table th {
+    text-align: center;
+}
+
+.action-buttons button {
+    margin-right: 10px;
+}
+
+table th:last-child, table td:last-child {
+    width: 250px;
+    max-width: 250px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+

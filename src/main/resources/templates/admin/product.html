@@ -23,7 +23,7 @@
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">Thêm Sản Phẩm</button>
   </div>
 
-  <table class="table table-striped table-bordered">
+  <table class="table table-striped table-bordered justify-content-center">
     <thead>
     <tr>
       <th>#</th>
@@ -32,7 +32,6 @@
       <th>Mô Tả</th>
       <th>Giá</th>
       <th>Giảm Giá</th>
-      <th>Ảnh</th>
       <th>Thao Tác</th>
     </tr>
     </thead>
@@ -44,7 +43,6 @@
       <td th:text="${product.description}"></td>
       <td th:text="${product.prices}"></td>
       <td th:text="${product.discountPercentages}"></td>
-      <td th:text="${product.images}"></td>
       <td>
         <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal"
                 th:data-id="${product.id}" th:data-name="${product.name}" th:data-description="${product.description}"
@@ -53,6 +51,10 @@
                 th:data-categoryName="${product.category.name}">
           Sửa
         </button>
+        <a class="btn btn-info btn-sm" style="margin-right: 20px; margin-left: 20px "
+                th:href="@{'/admin/information/'+ ${product.id}}">
+          Xem
+        </a>
         <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteProductModal"
                 th:data-id="${product.id}">
           Xóa
@@ -152,12 +154,6 @@
             <input type="number" class="form-control" id="editProductDiscount" name="discountPercentages" step="0.1" min="0" max="100">
           </div>
 
-          <!-- Hình Ảnh -->
-          <div class="mb-3">
-            <label for="editProductImages" class="form-label">Hình Ảnh</label>
-            <input type="text" class="form-control" id="editProductImages" name="images" placeholder="Link hình ảnh">
-          </div>
-
           <!-- Danh Mục -->
           <div class="mb-3">
             <label for="editProductCategory" class="form-label">Danh Mục</label>
@@ -206,7 +202,6 @@
     var description = button.data('description');
     var price = button.data('price');
     var discount = button.data('discount');  // Lấy discount
-    var images = button.data('images');      // Lấy images
     var category = button.data('category');  // Lấy category ID
     var categoryName = button.data('categoryName');  // Lấy category name
 
@@ -216,7 +211,6 @@
     modal.find('.modal-body #editProductPrice').val(price);
     modal.find('.modal-body #productId').val(id);
     modal.find('.modal-body #editProductDiscount').val(discount);  // Gán giá trị discount vào trường
-    modal.find('.modal-body #editProductImages').val(images);  // Gán giá trị images vào trường
     modal.find('.modal-body #editProductCategory').val(category);  // Gán giá trị category vào trường
     modal.find('.modal-body #editProductCategoryName').val(categoryName);  // Gán giá trị category name vào trường
   });
@@ -227,6 +221,14 @@
     var button = $(event.relatedTarget);
     var id = button.data('id');
 
+    var modal = $(this);
+    modal.find('.modal-footer #deleteProductId').val(id);
+  });
+</script>
+<script>
+  $('#showProductModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var id = button.data('id');
     var modal = $(this);
     modal.find('.modal-footer #deleteProductId').val(id);
   });
