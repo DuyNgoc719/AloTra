@@ -17,7 +17,7 @@
             Mã xác nhận đã được gửi đến email <strong id="user-email"></strong>. Vui lòng nhập mã bên dưới để tiếp
             tục.
         </p>
-        <form action="/verify-code" method="POST" class="space-y-6">
+        <form th:action="@{/verify-code}" method="POST" class="space-y-6">
             <div>
                 <label for="verification-code" class="block text-sm font-semibold text-gray-700">Mã xác nhận</label>
                 <input type="text" id="verification-code" name="verification_code" required
@@ -33,7 +33,7 @@
             <a href="/resend-code" class="back-link">
                 Gửi lại mã
             </a>
-            <a href="/forgot-password" class="back-link">
+            <a href="/reset-password" class="back-link">
                 Quay về trang Quên Mật Khẩu
             </a>
         </div>

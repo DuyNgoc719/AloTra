@@ -15,7 +15,7 @@
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 class="text-center text-2xl font-bold text-gray-700 mb-6">Thiết Lập Mật Khẩu</h1>
 
-        <form action="/set-password" method="POST" class="space-y-6">
+        <form th:action="@{/set-password}" method="POST" class="space-y-6">
             <!-- Nhập mật khẩu mới -->
             <div class="space-y-2">
                 <label for="new-password" class="block text-base font-medium text-gray-700">Mật khẩu mới</label>
@@ -39,7 +39,7 @@
 
         <!-- Liên kết Quay lại -->
         <div class="back-link">
-            <a href="/forgot-password" class="back-link">
+            <a href="/reset-password" class="back-link">
                 Quay về trang Quên Mật Khẩu
             </a>
         </div>
