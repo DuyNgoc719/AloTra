@@ -4,12 +4,15 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.Set;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name="product")
+@Table(name = "product")
 @Data
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,15 +27,21 @@ public class Product {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Product_Images> images;
+    @Column(name = "images")
+    private String images;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Product_Price> prices;
+    @Column(name = "prices")
+    private Double prices;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Product_Reviews> reviews;
+    @Column(name = "reviews")
+    private String reviews;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Product_Discounts> discounts;
+    @Column(name = "discount_percentages")
+    private Double discountPercentages;
+
+    @Column(name = "discount_start_dates")
+    private Date discountStartDates;
+
+    @Column(name = "discount_end_dates")
+    private Date discountEndDates;
 }

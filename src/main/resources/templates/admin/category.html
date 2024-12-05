@@ -13,8 +13,13 @@
 <div th:replace="~{admin/sidebar/sidebar-admin}"></div>
 <div class="container my-5">
   <h2 class="text-center mb-4">Quản Lý Danh Mục Sản Phẩm</h2>
-
-  <div class="text-end mb-3">
+  <div class="d-flex justify-content-center mb-3">
+    <!-- Thanh tìm kiếm -->
+    <div class="input-group me-2" style="max-width: 300px;">
+      <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm danh mục..." aria-label="Tìm kiếm danh mục" />
+      <button class="btn btn-outline-secondary" id="searchBtn">Tìm kiếm</button>
+    </div>
+    <!-- Nút Thêm Danh Mục -->
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">Thêm Danh Mục</button>
   </div>
 
@@ -27,7 +32,7 @@
       <th>Thao Tác</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="categoryTableBody">
     <tr th:each="category : ${categories}">
       <td th:text="${category.id}"></td>
       <td th:text="${category.name}"></td>
@@ -144,6 +149,27 @@
     var modal = $(this);
     modal.find('.modal-footer #deleteCategoryId').val(id);
   });
+</script>
+<script>
+  $('#searchBtn').on('click', function () {
+    var searchTerm = $('#searchInput').val().toLowerCase();
+    var rows = $('#categoryTableBody tr');
+
+    if (searchTerm.trim() === "") {
+      rows.show();
+    } else {
+      rows.each(function () {
+        var categoryName = $(this).find('td').eq(1).text().toLowerCase();
+
+        if (categoryName.indexOf(searchTerm) !== -1) {
+          $(this).show();
+        } else {
+          $(this).hide();
+        }
+      });
+    }
+  });
+
 </script>
 </body>
 </html>
