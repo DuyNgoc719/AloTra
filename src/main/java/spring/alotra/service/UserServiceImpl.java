@@ -90,4 +90,8 @@ public class UserServiceImpl {
         byte[] imageBytes = file.getBytes();
         return Base64.getEncoder().encodeToString(imageBytes);
     }
+
+    public User findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }
