@@ -41,3 +41,31 @@ body { font-family: Arial, sans-serif; }
 .carousel-control-prev-icon, .carousel-control-next-icon {
     background-color: #850900;
 }
+.product-image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-icon-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cart-icon-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+
+.menu-item-wrapper img {
+    width: 100%;
+    height: auto;
+}

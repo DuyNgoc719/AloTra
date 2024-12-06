@@ -45,4 +45,9 @@ public class Product {
 
     @Column(name = "discount_end_dates")
     private Date discountEndDates;
+
+    @Override
+    public String toString() {
+        return "Product{id=" + id + ", name='" + name + "', description='" + description + "', price=" + prices + "}";
+    }
 }

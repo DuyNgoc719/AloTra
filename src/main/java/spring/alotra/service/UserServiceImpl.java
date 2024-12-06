@@ -94,4 +94,8 @@ public class UserServiceImpl {
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
+    public User findUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
 }

@@ -20,7 +20,11 @@ public class Category {
     @Column()
     private String description;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Product> products;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Product> products;
 
+    @Override
+    public String toString() {
+        return "Category{id=" + id + ", name='" + name + "', description='" + description + "'}";
+    }
 }

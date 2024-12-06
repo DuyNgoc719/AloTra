@@ -38,7 +38,7 @@ public class UserController {
     @GetMapping("/register")
     public String showRegisterForm(Model model){
         model.addAttribute("user", new User());
-        return "register";
+        return "form/register";
     }
 
     @PostMapping("/register" )
@@ -51,7 +51,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String showLoginForm(Model model){
-        return "login";
+        return "form/login";
     }
 
     @PostMapping("/login")
@@ -61,6 +61,10 @@ public class UserController {
         if (resp.containsKey("access_token")) {
             String role = (String) resp.get("role");
             String token = (String) resp.get("access_token");
+            Jwt jwt = jwtUtil.decode(token);
+            String usernameString = jwt.getSubject();
+            User user = userService.findUserByUsername(username);
+            session.setAttribute("user", user);
             session.setAttribute("access_token", token);
             System.out.println(role);
             if (role.equals("ADMIN")) {
@@ -69,27 +73,19 @@ public class UserController {
                 mav.setViewName("redirect:/home");
             }
         } else {
-            mav.setViewName("login");
+            mav.setViewName("redirect:/login");
         }
         return mav;
     }
     @GetMapping("home")
     public String showHomePage(Model model){
-        return "home";
+        return "form/home";
     }
     @GetMapping("menu")
     public String showMenuPage(Model model){
-        return "menu";
+        return "form/menu";
     }
 
-    @GetMapping("itemDrink")
-    public String showItemDrinkPage(Model model){
-        return "item-drink";
-    }
-    @GetMapping("asd")
-    public String showAsdPage(Model model){
-        return "asd";
-    }
     @GetMapping("account")
     public String showAccountPage(Model model, HttpSession session)
     {
@@ -99,7 +95,7 @@ public class UserController {
         User user = userService.findUserByUsername(username);
         session.setAttribute("current_user", user);
         model.addAttribute("user", user);
-        return "account";
+        return "form/account";
     }
     @PostMapping("account")
     public String updateAccount(@ModelAttribute("user") User newUser,
@@ -139,7 +135,7 @@ public class UserController {
     }
     @GetMapping("/forgot-password")
     public String resetPassword(Model model) {
-        return "forgotPass1";
+        return "form/forgotPass1";
     }
 
     @PostMapping("/check-user")
