@@ -22,7 +22,7 @@ public class Wishlist {
     private List<Product> products;
 
     @OneToOne
-    @JoinColumn(name = "userId",  referencedColumnName = "userId")
+    @JoinColumn(name = "id",  referencedColumnName = "id")
     private User user;
 
 }

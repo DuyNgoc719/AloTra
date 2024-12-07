@@ -45,4 +45,5 @@ public class Product {
 
     @Column(name = "discount_end_dates")
     private Date discountEndDates;
+
 }

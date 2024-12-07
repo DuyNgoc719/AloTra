@@ -2,6 +2,7 @@ package spring.alotra.controllers;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Controller;
@@ -10,9 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import spring.alotra.config.JwtUtil;
+import spring.alotra.entity.Product;
 import spring.alotra.entity.User;
 import spring.alotra.repository.PasswordResetRepository;
 import spring.alotra.service.EmailService;
+import spring.alotra.service.ProductService;
 import spring.alotra.service.UserServiceImpl;
 
 import java.io.IOException;
@@ -28,7 +31,8 @@ public class UserController {
     public UserController(JwtUtil jwtUtil) {this.jwtUtil = jwtUtil;}
     @Autowired
     UserServiceImpl userService;
-
+    @Autowired
+    private ProductService productService;
     @Autowired
     private PasswordResetRepository tokenRepository;
 
@@ -86,6 +90,7 @@ public class UserController {
     public String showItemDrinkPage(Model model){
         return "item-drink";
     }
+
     @GetMapping("asd")
     public String showAsdPage(Model model){
         return "asd";

@@ -2,6 +2,7 @@ package spring.alotra.service;
 
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import spring.alotra.entity.*;
 import spring.alotra.repository.*;
