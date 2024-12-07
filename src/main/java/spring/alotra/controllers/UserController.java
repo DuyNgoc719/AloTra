@@ -158,4 +158,8 @@ public class UserController {
             return ResponseEntity.badRequest().body("Token không hợp lệ hoặc đã hết hạn.");
         }
     }
+    @GetMapping("aboutus")
+    public String showAboutUsPage(Model model) {return "aboutus";}
+    @GetMapping("blog")
+    public String showBlogPage(Model model) {return "blog-list";}
 }
