@@ -3,6 +3,7 @@ package spring.alotra.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import spring.alotra.entity.ResetPassword;
 import spring.alotra.entity.User;
@@ -20,6 +21,9 @@ public class EmailService {
 
     @Autowired
     private UserServiceImpl userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public void sendResetToken(String email) {
         User user = userService.findUserByEmail(email);
@@ -57,6 +61,8 @@ public class EmailService {
         if (user == null) {
             return false;
         }
+
+        newPassword = passwordEncoder.encode(newPassword);
 
         user.setPassword(newPassword);
         userService.saveUser(user);

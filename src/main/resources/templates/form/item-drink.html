@@ -13,7 +13,6 @@
 <div th:replace="~{layout/home-layout :: nar-bar}"></div>
 <div class="container mt-5">
     <div class="row">
-        <!-- Thanh lọc sản phẩm -->
         <div class="col-md-3">
             <div class="filter">
                 <h4>Thanh Lọc</h4>
@@ -60,6 +59,7 @@
 <div th:replace="~{layout/home-layout :: footer}"></div>
 
 <!-- Modal -->
+<form action="/cart" method="get">
 <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -72,11 +72,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary">Đi tới giỏ hàng</button>
+                <button type="submit" class="btn btn-primary">Đi tới giỏ hàng</button>
             </div>
         </div>
     </div>
 </div>
+</form>
 
 <script>
     document.querySelectorAll('.product-image-container').forEach(item => {
@@ -106,12 +107,19 @@
                 quantity: quantity
             })
         })
-            .then(response => response.json())
-            .then(data => {
-                const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
-                cartModal.show();
+            .then(response => {
+                // Nếu yêu cầu thành công, hiển thị modal
+                if (response.ok) {
+                    const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+                    cartModal.show();
+                } else {
+                    alert('Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng.');
+                }
             })
-            .catch(error => console.error('Error:', error));
+            .catch(error => {
+                console.error('Lỗi:', error);
+                alert('Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng.');
+            });
     }
 </script>
 

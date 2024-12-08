@@ -90,18 +90,12 @@ public class UserController {
         return "form/menu";
     }
 
-<<<<<<< HEAD
-=======
-    @GetMapping("itemDrink")
-    public String showItemDrinkPage(Model model){
-        return "item-drink";
-    }
+
 
     @GetMapping("asd")
     public String showAsdPage(Model model){
         return "asd";
     }
->>>>>>> 2ae07abf677d712ef8580f875064008b3c87ee31
     @GetMapping("account")
     public String showAccountPage(Model model, HttpSession session)
     {
@@ -164,14 +158,22 @@ public class UserController {
         return new ModelAndView("redirect:/login");
     }
 
-    @PostMapping("/reset-password")
-    public ResponseEntity<String> resetPassword(@RequestParam String token,
-                                                @RequestParam String newPassword) {
-        boolean result = emailService.resetPassword(token, newPassword);
+    @GetMapping("/reset-password")
+    public String showResetPasswordForm(@RequestParam("token") String token ,HttpSession session) {
+        session.setAttribute("token_pass", token);
+        return "form/forgotPass3";
+    }
+
+    @PostMapping("/confirm-pass")
+    public String resetPassword(@RequestParam("new_password") String new_password,HttpSession session) {
+
+        String token = session.getAttribute("token_pass").toString();
+
+        boolean result = emailService.resetPassword(token, new_password);
         if (result) {
-            return ResponseEntity.ok("Đặt lại mật khẩu thành công.");
+            return "redirect:/login";
         } else {
-            return ResponseEntity.badRequest().body("Token không hợp lệ hoặc đã hết hạn.");
+            return "redirect:/forgot-password";
         }
     }
     @GetMapping("aboutus")
