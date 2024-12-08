@@ -2,6 +2,7 @@ package spring.alotra.controllers;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Controller;
@@ -10,9 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import spring.alotra.config.JwtUtil;
+import spring.alotra.entity.Product;
 import spring.alotra.entity.User;
 import spring.alotra.repository.PasswordResetRepository;
 import spring.alotra.service.EmailService;
+import spring.alotra.service.ProductService;
 import spring.alotra.service.UserServiceImpl;
 
 import java.io.IOException;
@@ -28,7 +31,8 @@ public class UserController {
     public UserController(JwtUtil jwtUtil) {this.jwtUtil = jwtUtil;}
     @Autowired
     UserServiceImpl userService;
-
+    @Autowired
+    private ProductService productService;
     @Autowired
     private PasswordResetRepository tokenRepository;
 
@@ -86,6 +90,18 @@ public class UserController {
         return "form/menu";
     }
 
+<<<<<<< HEAD
+=======
+    @GetMapping("itemDrink")
+    public String showItemDrinkPage(Model model){
+        return "item-drink";
+    }
+
+    @GetMapping("asd")
+    public String showAsdPage(Model model){
+        return "asd";
+    }
+>>>>>>> 2ae07abf677d712ef8580f875064008b3c87ee31
     @GetMapping("account")
     public String showAccountPage(Model model, HttpSession session)
     {
@@ -160,6 +176,14 @@ public class UserController {
     }
     @GetMapping("aboutus")
     public String showAboutUsPage(Model model) {return "aboutus";}
+    @GetMapping("us1")
+    public String showUs1Page(Model model) {return "us1";}
+    @GetMapping("us2")
+    public String showUs2Page(Model model) {return "us2";}
+    @GetMapping("us3")
+    public String showUs3Page(Model model) {return "us3";}
     @GetMapping("blog")
     public String showBlogPage(Model model) {return "blog-list";}
+    @GetMapping("drink-now")
+    public String showDrinkNowPage(Model model) {return "drinkNow";}
 }

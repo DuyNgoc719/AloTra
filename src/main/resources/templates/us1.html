@@ -1,0 +1,131 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>NGUỒN GỐC</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/css/form/navbar.css}">
+    <link type="text/css" rel="stylesheet" th:href="@{/css/form/menu.css}">
+    <style>
+        .section-header {
+            background-image: url('/image/aboutus/career.png'); /* Đổi thành URL ảnh header */
+            background-size: cover;
+            background-position: center;
+            height: 250px;
+        }
+
+        .section-header h1 {
+            color: white;
+            text-align: center;
+            line-height: 250px;
+            font-size: 2.5rem;
+        }
+
+        .service-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .service-item img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .service-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .service-item .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .overlay h3 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .content {
+            padding: 2rem 0;
+        }
+
+        .content h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{layout/home-layout :: nar-bar}"></div>
+
+
+<!-- Header Section -->
+<div class="section-header">
+    <h1>NGUỒN GỐC</h1>
+</div>
+
+<!-- Content Section -->
+<div class="container content">
+    <h2>Câu Chuyện Này Là Của Chúng Mình</h2>
+    <p>
+        Bắt nguồn từ tình yêu dành cho đất Việt cùng với cà phê và cộng đồng nơi đây. Tinh thần cộng đồng luôn chảy trong ADN của mỗi người Việt mình.
+        Ngay từ những ngày đầu tiên, mục tiêu của chúng mình là có thể phục vụ và góp phần phát triển cộng đồng bằng cách siết chặt thêm sự kết nối và sự gắn bó giữa người với người.
+        Ngày hôm nay, với hàng trăm cửa hàng trên khắp Việt Nam và trên Thế Giới, thứ chúng mình đem lại không chỉ dừng lại ở cà phê. Chúng mình còn là nơi để thuộc về,
+        là nơi để kết nối tất cả mọi người với nhau. Từ đó, Alotra trở thành nơi dành riêng cho cộng đồng.
+    </p>
+    <p>
+        Trong tương lai, chúng mình sẽ luôn thấy một Việt Nam đang phát triển và một Alotra không ngừng cải tiến.
+        Alotra - điểm tụ họp của cộng đồng, nơi mọi người có thể kết nối và gắn kết với nhau bằng tình yêu dành cho cà phê, trà và các món ăn ngon.
+        Tại Alotra, chúng mình luôn sát cánh cùng bạn, chúng mình luôn ủng hộ bạn và chúng mình luôn đồng hành với nhau như một cộng đồng.
+    </p>
+
+    <!-- Service Section -->
+    <div class="row">
+        <!-- Service Item 1 -->
+        <div class="col service-item" onclick="window.location.href='us2'">
+            <img src="/image/aboutus/service_cleanup.png" alt="Dịch Vụ">
+            <div class="overlay">
+                <h3>Dịch Vụ</h3>
+            </div>
+        </div>
+
+        <!-- Service Item 2 -->
+        <div class="col service-item" onclick="window.location.href='us3'">
+            <img src="/image/aboutus/cleanup.png" alt="Nghề Nghiệp">
+            <div class="overlay">
+                <h3>Nghề Nghiệp</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Optional: Any JS can go here if needed later
+</script>
+
+
+
+
+<div th:replace="~{layout/home-layout :: footer}"></div>
+<script th:src="@{/js/menu.js}"></script>
+</body>
