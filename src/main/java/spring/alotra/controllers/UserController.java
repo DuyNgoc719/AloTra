@@ -177,4 +177,6 @@ public class UserController {
     public String showUs3Page(Model model) {return "us3";}
     @GetMapping("blog")
     public String showBlogPage(Model model) {return "blog-list";}
+    @GetMapping("drink-now")
+    public String showDrinkNowPage(Model model) {return "drinkNow";}
 }
