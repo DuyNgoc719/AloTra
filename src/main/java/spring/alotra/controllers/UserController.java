@@ -169,6 +169,12 @@ public class UserController {
     }
     @GetMapping("aboutus")
     public String showAboutUsPage(Model model) {return "aboutus";}
+    @GetMapping("us1")
+    public String showUs1Page(Model model) {return "us1";}
+    @GetMapping("us2")
+    public String showUs2Page(Model model) {return "us2";}
+    @GetMapping("us3")
+    public String showUs3Page(Model model) {return "us3";}
     @GetMapping("blog")
     public String showBlogPage(Model model) {return "blog-list";}
 }
