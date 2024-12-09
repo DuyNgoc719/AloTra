@@ -7,5 +7,7 @@ import spring.alotra.entity.Order;
 import java.util.List;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Integer> {
+public interface OrderRepository extends JpaRepository<Order, Long> {
+    Order findByOrderId(Long orderId);
+    List<Order> findByCustomerId(Long customerId);
 }

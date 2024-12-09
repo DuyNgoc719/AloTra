@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Danh sách Đơn Hàng</title>
+  <!-- Thêm Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Danh sách Đơn Hàng</h1>
+  <table class="table table-bordered table-hover">
+    <thead class="table-primary">
+    <tr>
+      <th>ID</th>
+      <th>Khách Hàng</th>
+      <th>Ngày Đặt</th>
+      <th>Tổng Tiền</th>
+      <th>Địa Chỉ Giao Hàng</th>
+      <th>Phương Thức Thanh Toán</th>
+      <th>Trạng Thái</th>
+      <th>Ghi Chú</th>
+      <th>Hành động</th>
+      <th>Chi Tiết</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+      <td th:text="${order.orderId}"></td>
+      <td th:text="${order.customerId}"></td>
+      <td th:text="${order.orderDate}"></td>
+      <td th:text="${@currencyFormatter.formatCurrency(order.totalAmount)}"></td>
+      <td th:text="${order.shippingAddress}"></td>
+      <td th:text="${order.paymentMethod}"></td>
+      <td>
+        <span th:if="${order.orderStatus == 'Pending'}" class="badge bg-warning text-dark">Pending</span>
+        <span th:if="${order.orderStatus == 'Completed'}" class="badge bg-success">Completed</span>
+        <span th:if="${order.orderStatus == 'Canceled'}" class="badge bg-danger">Canceled</span>
+      </td>
+
+      <td class="text-center">
+        <form th:action="@{'/cart/orders/' + ${order.orderId}}" method="get">
+          <button type="submit" class="btn btn-sm btn-info text-white me-2">
+            Xem chi tiết
+          </button>
+        </form>
+
+      </td>
+      <td>
+        <form th:action="@{'/admin/orders/accept/' + ${order.orderId}}" method="post" class="d-inline">
+          <button type="submit" class="btn btn-sm btn-danger text-white"
+                  onclick="return confirm('Bạn có chắc chắn muốn xác nhận hàng này không?');">
+            <i class="bi bi-x-circle"></i> Xác nhận
+          </button>
+        </form>
+      </td>
+      <td>
+        <form th:action="'orders/cancel/'+ ${order.orderId}" method="post" class="d-inline">
+          <button type="submit" class="btn btn-sm btn-danger text-white">
+            <i class="bi bi-x-circle"></i> Hủy đơn
+          </button>
+        </form>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

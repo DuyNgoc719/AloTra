@@ -8,11 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import spring.alotra.entity.Cart;
-import spring.alotra.entity.User;
-import spring.alotra.service.CartService;
+import spring.alotra.entity.*;
+import spring.alotra.service.*;
 
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/cart")
@@ -20,6 +24,14 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private UserServiceImpl userService;
+    @Autowired
+    private ProductService productService;
 
     @GetMapping("")
     public String viewCart(Model model,HttpSession session) {
@@ -55,6 +67,69 @@ public class CartController {
     {
         System.out.println("quantity: " + quantity);
         cartService.updateQuantity(cartItemId, quantity);
+        return "redirect:/cart";
+    }
+
+    @GetMapping("/view-customerOrder")
+    public String viewCustomerOrder(Model model,HttpSession session) {
+        User user = (User) session.getAttribute("user");
+
+        List<Order> orders = orderService.findAll();
+
+        List<Order> orderCustomer = new ArrayList<>();
+
+        for (Order order : orders) {
+            if (order.getCustomerId().equals(user.getId())) {
+                orderCustomer.add(order);
+            }
+        }
+
+
+        model.addAttribute("orders", orderCustomer);
+        model.addAttribute("user", user);
+        System.out.println("orderCustomer: " + orderCustomer);
+        return "form/customerOrder";
+    }
+
+    @GetMapping("/orders/{orderId}")
+    public String viewOrderDetails(Model model, @PathVariable Long orderId) {
+        List<Order> orders = orderService.findAll();
+        List<Order> orderCustomer = new ArrayList<>();
+
+        for (Order order : orders) {
+            if (order.getOrderId().equals(orderId)) {
+                orderCustomer.add(order);
+            }
+        }
+        model.addAttribute("orders", orderCustomer);
+
+        List<Product> find_products = productService.getAll();
+
+        List<Product> products = new ArrayList<>();
+
+        for (Product product : find_products) {
+            for (Order order : orders) {
+                List<OrderDetail> orderDetails = order.getOrderDetails();
+                for (OrderDetail orderDetail : orderDetails) {
+                    if (orderDetail.getProductId().equals(product.getId())) {
+                        products.add(product);
+                    }
+                }
+            }
+
+        }
+            model.addAttribute("products",products);
+        return "form/detailOrderCustomer";
+    }
+
+    @PostMapping("/orders/cancel/{orderId}")
+    public String cancelOrder(@PathVariable Long orderId) {
+        List<Order> orders = orderService.findAll();
+        for (Order order : orders) {
+            if (order.getOrderId().equals(orderId)) {
+                orderService.delete(order);
+            }
+        }
         return "redirect:/cart";
     }
 

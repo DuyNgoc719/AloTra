@@ -6,6 +6,7 @@ import spring.alotra.entity.Order;
 import spring.alotra.repository.OrderRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -19,4 +20,13 @@ public class OrderService {
     public void save(Order order) {
         orderRepository.save(order);
     }
+
+    public void delete(Order order) {
+        orderRepository.delete(order);
+    }
+
+    public Optional<Order> findById(Long id) {
+        return orderRepository.findById(id);
+    }
+
 }

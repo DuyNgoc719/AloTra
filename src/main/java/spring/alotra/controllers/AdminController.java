@@ -2,25 +2,21 @@ package spring.alotra.controllers;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.MethodParameter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import spring.alotra.config.JwtUtil;
+import spring.alotra.entity.Order;
 import spring.alotra.entity.User;
-import spring.alotra.service.UserService;
+import spring.alotra.service.OrderService;
 import spring.alotra.service.UserServiceImpl;
 
 import java.io.IOException;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/admin/")
@@ -29,6 +25,9 @@ public class AdminController {
     private final JwtUtil jwtUtil;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private OrderService orderService;
+
 
     public AdminController(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
@@ -119,6 +118,26 @@ public class AdminController {
         return new ModelAndView("redirect:/login");
     }
 
+    @GetMapping("orders")
+    public String showOrders(Model model, HttpSession session) {
+
+
+        List<Order> orders= orderService.findAll();
+
+        model.addAttribute("orders", orders);
+
+        return "admin/order-customer";
+    }
+
+    @PostMapping("orders/accept/{orderId}")
+    public String accpetOrder(@PathVariable Long orderId, Model model, HttpSession session) {
+        Optional<Order> order = orderService.findById(orderId);
+        if (order.isPresent()) {
+            Order order_change = order.get();
+            order_change.setOrderStatus("Completed");
+        }
+        return "redirect:/orders" + orderId;
+    }
 
 
 }

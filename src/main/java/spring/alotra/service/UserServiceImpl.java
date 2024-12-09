@@ -19,10 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.Instant;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserServiceImpl {
@@ -97,5 +94,9 @@ public class UserServiceImpl {
 
     public User findUserById(Long id) {
         return userRepository.findById(id).orElse(null);
+    }
+
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
     }
 }
