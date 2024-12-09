@@ -124,11 +124,11 @@ public class CartController {
 
     @PostMapping("/orders/cancel/{orderId}")
     public String cancelOrder(@PathVariable Long orderId) {
-        List<Order> orders = orderService.findAll();
-        for (Order order : orders) {
-            if (order.getOrderId().equals(orderId)) {
-                orderService.delete(order);
-            }
+        Optional<Order> order = orderService.findById(orderId);
+        if (order.isPresent()){
+            Order change_order = order.get();
+            change_order.setOrderStatus("Canceled");
+            orderService.save(change_order);
         }
         return "redirect:/cart";
     }

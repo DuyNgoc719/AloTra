@@ -26,8 +26,7 @@ public class ProductController {
 
     @Autowired
     private CategoryService categoryService;
-    @Autowired
-    private CategoryRepository categoryRepository;
+
     @Autowired
     private UserServiceImpl userService;
 
@@ -82,8 +81,14 @@ public class ProductController {
     }
 
     @PostMapping("delete-product")
-    public String deleteProduct(@RequestParam Long id) {
-        productService.deleteProduct(id);
+    public String deleteProduct(@RequestParam int id) {
+        System.out.println("al;fhuowf");
+        Optional<Product> product = productService.findById(id);
+        if (product.isPresent()){
+            Product product_delete = product.get();
+            System.out.println(product_delete);
+            productService.deleteProduct(product_delete);
+        }
         return "redirect:/admin/product";
     }
 

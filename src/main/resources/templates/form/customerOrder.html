@@ -45,17 +45,10 @@
                 </form>
 
             </td>
-            <td class="text-center">
-                <form th:action="'orders/' + ${order.orderId}" method="get">
-                    <button type="submit" class="btn btn-sm btn-info text-white me-2">
-                        Chấp Nhận
-                    </button>
-                </form>
-
-            </td>
             <td>
                 <form th:action="'orders/cancel/'+ ${order.orderId}" method="post" class="d-inline">
                     <button type="submit" class="btn btn-sm btn-danger text-white"
+                            th:disabled="${order.orderStatus == 'Canceled'}"
                             onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?');">
                         <i class="bi bi-x-circle"></i> Hủy đơn
                     </button>

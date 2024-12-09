@@ -135,8 +135,20 @@ public class AdminController {
         if (order.isPresent()) {
             Order order_change = order.get();
             order_change.setOrderStatus("Completed");
+            orderService.save(order_change);
         }
-        return "redirect:/orders" + orderId;
+        return "redirect:/admin/orders";
+    }
+
+    @PostMapping("orders/cancel/{orderId}")
+    public String cancelOrder(@PathVariable Long orderId, Model model, HttpSession session) {
+        Optional<Order> order = orderService.findById(orderId);
+        if (order.isPresent()) {
+            Order order_change = order.get();
+            order_change.setOrderStatus("Cancelled");
+            orderService.save(order_change);
+        }
+        return "redirect:/admin/orders";
     }
 
 

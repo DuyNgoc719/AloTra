@@ -56,4 +56,13 @@ public class CartService {
         cart.setQuantity(quantity);
         cartRepository.save(cart);
     }
+
+    public Cart findByIdCustomer(Long userId) {
+        return cartRepository.findById(userId).orElseThrow();
+    }
+
+    public void deleteCart(Cart cart){
+        cartRepository.delete(cart);
+    }
 }
+

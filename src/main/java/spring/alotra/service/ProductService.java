@@ -35,8 +35,9 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public void deleteProduct(long id) {
-        productRepository.deleteById(id);
+
+    public void deleteProduct(Product product) {
+        productRepository.delete(product);
     }
     public Page<Product> findProductsByPriceLessThanEqual(double price, Pageable  page) {
 

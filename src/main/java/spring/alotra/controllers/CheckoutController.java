@@ -79,6 +79,7 @@ public class CheckoutController {
         order.setTotalAmount(total);
 
         orderService.save(order);
+
         session.setAttribute("order", order);
 
         List<Cart> cartItems = cartService.getCartItems(user.getId());
@@ -92,7 +93,8 @@ public class CheckoutController {
                 detail.setUnitPrice(cart.getProduct().getPrices());
                 return detail;
             }).collect(Collectors.toList());
-
+            Cart find_cart = cartService.findByIdCustomer(user.getId());
+            cartService.deleteCart(find_cart);
             orderDetailService.save(orderDetails);
         }
 
